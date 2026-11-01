@@ -1,0 +1,12 @@
+Step-1: Go to project folder
+Step-2: Check git version : git --version
+Step-3: If Git is not installed : sudo apt update, sudo apt install git -y
+Step-4: Configure git : git config --global user.name "SameekshaBadugu" , git config --global user.email "24wh1a05c5@bvrithyderabad.edu.in"
+Step-5: Verify the git configuration settings : git config --list
+Step-6: Create Git repository in github : SameekshaBadugu/LabExternal
+Step-7: Initialize git repository : git init
+Step-8: Check status : git status
+Step-9 : Add files : git add .
+Step-10: Commit changes : git commit -m "Added Registration Page"
+Step-11: Connect to github : git branch -M main , git remote add origin https://github.com/SameekshaBadugu/LabExternal.git
+Step-12: Push on to Github : git push -u origin main
