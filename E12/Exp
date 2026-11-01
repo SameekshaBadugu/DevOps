@@ -1,0 +1,77 @@
+1. Do the 7 steps of Exp-11
+2. Create Spring boot test project :mkdir springboot-test , cd springboot-test
+3. Create maven configuration file - nano pom.xml
+
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.4.5</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>com.example</groupId>
+    <artifactId>springboot-test</artifactId>
+    <version>1.0</version>
+
+    <properties>
+        <java.version>17</java.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+</project>
+4. Create the test class - src/test/java/com/example/DockerApplicationTest.java.
+package com.example;
+
+import org.junit.jupiter.api.Test;
+import java.net.*;
+import java.net.http.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+public class DockerApplicationTest {
+
+    String url = "http://localhost:5000";
+
+    HttpResponse<String> get(String path) throws Exception {
+        return HttpClient.newHttpClient().send(
+            HttpRequest.newBuilder()
+                .uri(URI.create(url + path)).GET().build(),
+            HttpResponse.BodyHandlers.ofString());
+    }
+
+    @Test
+    void testHomePage() throws Exception {
+        var r = get("/");
+        assertEquals(200, r.statusCode());
+        assertTrue(r.body().contains("24WH1A05C5"));
+    }
+
+    @Test
+    void testHealthEndpoint() throws Exception {
+        var r = get("/health");
+        assertEquals(200, r.statusCode());
+        assertTrue(r.body().contains("UP"));
+    }
+
+    @Test
+    void testInvalidEndpoint() throws Exception {
+        assertEquals(404, get("/invalid").statusCode());
+    }
+}
+
+5. Check java and maven versions
+6. Run the tests - mvn tests
