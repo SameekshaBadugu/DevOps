@@ -1,0 +1,19 @@
+1. Check version and info : docker --version , docker info
+2. Download an image: docker pull ubuntu
+3. List docker images : docker images
+4. Search an image : docker search nginx
+5. Create and run docker container : docker run -it --name myubuntu ubuntu
+6. List running containers : docker ps
+7. List all containers : docker ps -a
+8. Start container : docker start myubuntu
+9. Execute Commands Inside Container : docker exec -it myubuntu bash : mkdir DockerLab, cd DockerLab, touch file.txt, exit
+10. View container logs : docker logs myubuntu
+11. Inspect a container : docker inspect myubuntu
+12. Copy files from host to container : docker cp file.txt myubuntu:/tmp/file.txt
+13. Copy files from container to host : docker cp myubuntu:/tmp/file.txt .
+14. Stop a Container : docker stop myubuntu
+15. Remove a Container : docker rm myubuntu
+16. Remove an Image : docker rmi ubuntu
+17. Copy files from host to container : docker cp file.txt myubuntu:/tmp/file.txt
+18. Copy files from container to host : docker cp myubuntu:/tmp/file.txt .
+19. Remove a container : docker rename myubuntu ubuntu-container
