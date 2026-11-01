@@ -1,0 +1,36 @@
+Step-1: Create a python application
+app.py
+app.py
+from flask import Flask
+app = Flask(__name__)
+@app.route('/')
+def home():
+return "<h1>Welcome to Docker, SAMEEKSHA - 24WH1A05C5!!!</h1><h3>Simple Containerized Flask
+Application</h3>";
+if __name__ == '__main__':
+app.run(host= '0.0.0.0', port=5000)
+
+Step 2:Create Requirements File (Requirements.txt)
+Flask == 3.0.3
+
+Step-3:Create Dockerfile(Dockerfile)
+#Use official Python image
+FROM python:3.11-slim
+#Set working directory
+WORKDIR /app
+#Copy files
+COPY Requirements.txt .
+RUN pip install --no-cache-dir -r Requirements.txt
+COPY . .
+#Explore Application Port
+EXPOSE 5000
+#Run Application
+CMD ["python" , "app.py"]
+
+Step-4: Build Docker image : docker build -t flask-demo .
+
+Step-5: Run Docker Container : docker run -d -p 5000:5000 --name mycontainer flask-demo
+
+Step 6:Verify Running Containers: docker ps
+
+Step 7: Stop and Remove Container : docker stop mycontainer , docker rm mycontainer
