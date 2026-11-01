@@ -1,0 +1,25 @@
+1. Check git version : git --version
+2. If not installed : sudo apt update , sudo apt install git -y
+   Create a project and initialize git : mkdir GitPractice , cd GitPractice , git init
+3. Configure git:
+   git config --global user.name "YourName"
+   git config --global user.email "yourmail@gmail.com"
+   For verification of git configuration settings: git config --list
+   Create a file to push
+4. Check status and add files:
+   git status(Shows untracked files)
+   git add .
+   git status(Shows files that are added to staging area)
+5. Commit changes : git commit -m "Initial commit"
+6. View commit history : git log (Shows complete history) , git log --oneline(Shows history in a compact way)
+7. Modify the files and check for differences : git diff
+8. Create and switch branches : 
+   git branch test(Creates a new branch test)
+   git branch(Displays local branches)
+   git checkout test(Switches from current branch to test branch)
+9. Switch to main : git checkout main
+10. Merge branches : git merge test
+11. Connect github : git remote add origin https://github.com/YOUR_USERNAME/GitPractice.git
+12. Check remote: git remote -v(Shows remote repos connected to local git Repo)
+13. Push files: git push -u origin main
+14. Pull changes : git pull origin main
