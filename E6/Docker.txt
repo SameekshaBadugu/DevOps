@@ -6,7 +6,7 @@
 6. List running containers : docker ps
 7. List all containers : docker ps -a
 8. Start container : docker start myubuntu
-9. Execute Commands Inside Container : docker exec -it myubuntu bash : mkdir DockerLab, cd DockerLab, touch file.txt, exit
+9. Execute Commands Inside Container : docker exec -it myubuntu bash : pwd , mkdir DockerLab, cd DockerLab, touch file.txt, exit
 10. View container logs : docker logs myubuntu
 11. Inspect a container : docker inspect myubuntu
 12. Copy files from host to container : docker cp file.txt myubuntu:/tmp/file.txt
