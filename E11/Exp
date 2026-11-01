@@ -1,0 +1,50 @@
+1. Create a directory : mkdir karate-docker , cd karate-docker
+2. Create JS application - nano app.js
+const http = require('http');
+http.createServer((req, res) => {
+    res.writeHead(req.url === '/invalid' ? 404 : 200,
+        { 'Content-Type': 'application/json' });
+    if (req.url === '/')
+        res.end(JSON.stringify({ message: 'Hello from JavaScript Docker Application' }));
+    else if (req.url === '/health')
+        res.end(JSON.stringify({ status: 'OK' }));
+    else
+        res.end(JSON.stringify({ error: 'Not Found' }));
+}).listen(5000, () => console.log('Server running on port 5000'));
+Ctrl+o,enter,ctrl+x
+3. Create Dockerfile : nano Dockerfile
+FROM node:20
+WORKDIR /app
+COPY app.js .
+EXPOSE 5000
+CMD ["node", "app.js"]
+4.Build docker image : docker build -t javascript-docker-app:1.0 .
+5. Run the docker container : docker run -d --name javascript-app -p 5000:5000 javascript-docker-app:1.0
+6. Verify the container : docker ps
+7. Test the application manually
+ curl http://localhost:5000
+ curl http://localhost:5000/health
+ curl http://localhost:5000/invalid
+8. Create a karate test directory : mkdir karate-test, cd karate-test
+9. Create nano docker-app.feature
+Feature: Test Dockerized JavaScript Application
+
+  Scenario: Verify home page
+    Given url 'http://localhost:5000'
+    When method get
+    Then status 200
+    And match response.message contains 'Hello from JavaScript Docker Application'
+
+  Scenario: Verify health endpoint
+    Given url 'http://localhost:5000/health'
+    When method get
+    Then status 200
+
+  Scenario: Verify invalid endpoint
+    Given url 'http://localhost:5000/invalid'
+    When method get
+    Then status 404
+10. Download karate standalone jar : wget -O karate.jar https://github.com/karatelabs/karate/releases/download/v2.1.3/karate-2.1.3.jar
+11. Verify the jar exists - ls -lh karate.jar
+12. Run the karate test - java -jar karate.jar docker-app.feature
+13. View karate test report - xdg-open target/karate-reports/karate-summary.html
