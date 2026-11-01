@@ -1,0 +1,45 @@
+1.Verify Java version : java -version
+2.If java is not available : sudo apt install fontconfig openjdk-21-jre -y
+3.Install Jenkins : sudo apt install jenkins -y
+4. Start jenkins : sudo systemctl start jenkins
+5. Enable Jenkins at boot : sudo systemctl enable jenkins
+6.Check Jenkins status: sudo systemctl status jenkins
+7.Access Jenkins DashBoard: http://localhost:8080
+8.Get Jenkins password : sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+Paste it in Jenkins Administrator password box
+9.Install plugins
+Customize Jenkins
+Select: Install suggested plugins
+Wait until the installation finishes.
+10.Create Jenkins user: Enter username, password, email, Full name(Save and continue)
+11.Jenkins URL : It shows http://localhost:8080
+Keep it as it is and save and continue
+
+Explore
+Dashboard - Shows your Jenkins jobs/projects.
+
+New Item - Used to create a new Jenkins job.
+ Click : New item (Freestyle project, Pipeline, Multibranch Pipeline)
+
+Manage Jenkins - Go to dashboard -> Manage Jenkins
+System
+Plugins
+Tools
+Nodes
+Security
+Credentials
+System Log
+
+Plugins - Manage Jenkins -> Plugins
+Installs and manages Jenkins plugins (Git, pipeline etc)
+
+Tools - Manage Jenkins -> Tools
+Jenkins can be configured with JDK, Git, Maven, Gradle
+
+Nodes - Manage Jenkins -> Nodes
+This shows the machines/agents that Jenkins can use to execute jobs.
+
+Credentials - Manage Credentials -> Credentials
+Credentials such as GitHub authentication can be configured here.
+
+
