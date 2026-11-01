@@ -1,0 +1,47 @@
+1. Check docker version : docker -version
+2. Check kubernetes version and it's cluster : kubectl version --client
+3. Build image of E7 - docker build -t docker-app:1.0 .
+4. Create deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: docker-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: docker-app
+template:
+  metadata:
+    labels:
+      app: docker-app
+spec:
+  containers:
+    - name: docker-app
+    image: docker-app:1.0
+    imagePullPolicy: IfNotPresent
+    ports:
+      - containerPort: 5000
+
+5.Deploy the application : kubectl apply -f deployment.yaml
+6. Check the deployment : kubectl get deployments
+7. Check the pods : kubectl get pods 
+8. Create a Kuberenetes service : service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: docker-app-service
+spec:
+  type: NodePort
+  selector:
+    app: docker-app
+  ports:
+    - protocol: TCP
+    port: 5000
+    targetPort: 5000
+
+9. Apply the service kubectl apply -f service.yaml
+10. Check services : kubectl get services
+11. Access the application : kubectl get service docker-app-service
+12. It is accessed through port forwarding : kubectl port-forward service/docker-app-service 5000:500
+13. Open http://localhost:5000
